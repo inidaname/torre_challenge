@@ -1,10 +1,8 @@
 <header>
-    <div>
         {{#if publicId}}
-        <img src="{{picture}}" alt="{{name}}'s picture">
-        {{publicId}}
+        <img src="{{picture}}" alt="{{name}}'s picture" class="logo-image">
+        <h1 class="title">{{publicId}}</h1>
         {{else }}
         fetching name...
         {{/if}}
-    </div>
 </header>

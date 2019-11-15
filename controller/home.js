@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.mainPage = async function(req, res, next) {
+    try {
       let {username} = req.params;
       username = (username) ? username : 'inidaname';
   
@@ -13,4 +14,7 @@ exports.mainPage = async function(req, res, next) {
       const {person: {name, publicId, picture}} = person;
       res.render('home', { title: 'Welcome', publicId, picture, name });
   
+    } catch (error) {
+      res.status(error.status).render('error', {message: error.message});
+    }
   }
