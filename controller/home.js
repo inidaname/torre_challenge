@@ -13,7 +13,7 @@ exports.mainPage = async function (req, res, next) {
       throw { message: person.message, status: 404 };
     }
 
-    res.render('home', { title: 'Welcome', person: person.person });
+    return res.render('home', { title: 'Welcome', person: person.person });
 
   } catch (error) {
     return next(error);

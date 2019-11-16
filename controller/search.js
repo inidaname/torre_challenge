@@ -16,7 +16,7 @@ exports.search = async function (req, res, next) {
 
             console.log(data)
 
-        res.status(200).json(data);
+        return res.status(200).json(data);
     } catch (error) {
         return next(error);
     }
