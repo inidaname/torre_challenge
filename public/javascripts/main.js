@@ -36,14 +36,6 @@ function setSearch(){
 
                 return result.append(document.createRange().createContextualFragment(userProfile));
             }).join(' ');
-
-            // people.forEach(person => {
-            //     let div = document.createElement('div');
-            //     div.insertAdjacentHTML('afterbegin', );
-            //     div.classList.add('profile-card');
-            //     div.innerText = person.name;
-            //     result.appendChild(div)
-            // })
         });
     }
 }

@@ -1,9 +1,13 @@
 <header>
   <section class="top-side">
-    {{#if person.publicId}}
-    <img src="{{person.picture}}" alt="{{person.name}}'s picture" class="logo-image">
+    {{#if person.name}}
+      {{#if person.picture}}
+      <img src="{{person.picture}}" alt="{{person.name}}'s picture" class="logo-image">
+      {{else}}
+      <img src="/images/blank-profile-picture.png" alt="{{person.name}}'s picture" class="logo-image">
+      {{/if}}
     <div class="title">
-      <h1>{{person.name}}'s <small>Torre's Page</small></h1>
+      <h1>{{person.name}}'s <small>Profile</small></h1>
       <p>{{person.professionalHeadline}}</p>
       <ul class="list-links">
         {{#each person.links}}
@@ -11,10 +15,9 @@
         {{/each}}
       </ul>
     </div>
-    {{else }}
-    fetching name...
     {{/if}}
   </section>
+  <hr>
   <section class="search">
     <div class="form-group">
       <label for="search">Search for User</label>

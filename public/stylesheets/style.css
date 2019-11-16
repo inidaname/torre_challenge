@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 body {
@@ -14,21 +15,31 @@ a {
 
 header {
   width: 100%;
-  height: 190px;
+  min-height: 280px;
   padding: 12px;
   display: inline-flex;
   align-items: center;
   flex-direction: column;
   justify-content: baseline;
   margin-bottom: 12px;
+  box-shadow: 0 7px 5px #ccc;
 }
 
 .logo {
   width: 100%;
-
 }
 .title {
-  margin-left: 12px;
+  margin: 21px 12px;
+}
+
+.title p {
+  max-width: 524px;
+  text-align: justify;
+  padding: 12px 6px;
+}
+
+.title ul {
+  margin-top: 5px;
 }
 
 .title h1 {
@@ -45,10 +56,15 @@ header {
 
 .top-side {
   width: 100%;
-  height: 120px;
+  height: 160px;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+}
+
+hr {
+  width: 80%;
+  margin: 6px auto;
 }
 
 .search {
@@ -59,6 +75,7 @@ header {
   flex-direction: wrap;
   align-items: center;
   justify-content: space-around;
+  margin: 24px auto;
 }
 
 #result {
@@ -73,24 +90,30 @@ header {
 
 .profile-card {
   width: 187px;
-  height: 234px;
+  height: 264px;
   box-shadow: 0 0 5px #ccc;
   margin: 21px 12px;
   padding: 12px;
   border-radius: 12px;
-  display: inline-flex;
+}
+
+.profile-card a {
+  display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .profile-card h2 {
   font-size: 14px;
   text-align: center;
+  text-decoration: none;
+  color: #000;
 }
 
 .profile-card p {
   font-size: 12px;
+  text-align: center;
 }
 
 .profile-card img {
@@ -104,5 +127,73 @@ header {
   list-style-type: none;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.list-links li {
+  margin-left: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
+  width: 68%;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-group input {
+  margin: 12px auto;
+  height: 37px;
+  padding: 0 8px;
+  font-size: 16px;
+  border: 1px #ccc solid;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 0 2px #ccc;
+}
+
+.form-group button {
+  width: 120px;
+  height: 42px;
+  border: 1px #ccc solid;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 2px #ccc;
+}
+
+
+@media only screen and (max-width: 600px) {
+  header {
+    min-height: 300px;
+  }
+  .top-side {
+    margin-top: 21px;
+  }
+  .search {
+    margin-top: 32px;
+  }
+  .form-group input {
+    margin: 12px auto;
+    height: 32px;
+    padding: 0 8px;
+    font-size: 16px;
+  }
+  .form-group button {
+    width: 100px;
+    height: 38px;
+    border: 1px #ccc solid;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 0 2px #ccc;  
+  }
 }
