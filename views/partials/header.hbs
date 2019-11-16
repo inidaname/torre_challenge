@@ -1,4 +1,7 @@
 <header>
+  <div class="navbar">
+    <span><a href="/">Home</a></span>
+  </div>
   <section class="top-side">
     {{#if person.name}}
       {{#if person.picture}}
@@ -7,7 +10,10 @@
       <img src="/images/blank-profile-picture.png" alt="{{person.name}}'s picture" class="logo-image">
       {{/if}}
     <div class="title">
-      <h1>{{person.name}}'s <small>Profile</small></h1>
+      <div class="user-name">
+        <h1>{{person.name}}'s <small>Profile</small></h1>
+        <button id="myBtn">Connections</button>
+      </div>
       <p>{{person.professionalHeadline}}</p>
       <ul class="list-links">
         {{#each person.links}}
@@ -22,7 +28,7 @@
     <div class="form-group">
       <label for="search">Search for User</label>
       <input type="search" name="User" id="user" oninput="setSearch()">
-      <button>Search</button>
+      <button onclick="setSearch()">Search</button>
     </div>
     {{!-- <input type="search" name="User" id="conn" oninput="searchConnection()"> --}}
   </section>

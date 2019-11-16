@@ -11,7 +11,7 @@ function checkBrowser(req, res, next) {
 }
 
 // Sending search query
-router.route('/search/:query*?/:connection*?').get(checkBrowser, search.search);
+router.route('/search/:query/:connection*?').get(checkBrowser, search.search);
 
 /* GET home page. */
 router.route('/:username*?').get(home.mainPage);
