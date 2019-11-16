@@ -1,8 +1,26 @@
 <header>
-        {{#if publicId}}
-        <img src="{{picture}}" alt="{{name}}'s picture" class="logo-image">
-        <h1 class="title">{{publicId}}</h1>
-        {{else }}
-        fetching name...
-        {{/if}}
+  <section class="top-side">
+    {{#if person.publicId}}
+    <img src="{{person.picture}}" alt="{{person.name}}'s picture" class="logo-image">
+    <div class="title">
+      <h1>{{person.name}}'s <small>Torre's Page</small></h1>
+      <p>{{person.professionalHeadline}}</p>
+      <ul class="list-links">
+        {{#each person.links}}
+        <li><a href="{{this.address}}"><i class="fa fa-{{this.name}}" aria-hidden="true"></i></a></li>
+        {{/each}}
+      </ul>
+    </div>
+    {{else }}
+    fetching name...
+    {{/if}}
+  </section>
+  <section class="search">
+    <div class="form-group">
+      <label for="search">Search for User</label>
+      <input type="search" name="User" id="user" oninput="setSearch()">
+      <button>Search</button>
+    </div>
+    {{!-- <input type="search" name="User" id="conn" oninput="searchConnection()"> --}}
+  </section>
 </header>

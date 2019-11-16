@@ -11,8 +11,8 @@ exports.mainPage = async function(req, res, next) {
         throw {message: person.message, status: 404};
       }
   
-      const {person: {name, publicId, picture}} = person;
-      res.render('home', { title: 'Welcome', publicId, picture, name });
+      // const {person: {name, publicId, picture}} = person;
+      res.render('home', { title: 'Welcome',  person: person.person });
   
     } catch (error) {
       res.status(error.status).render('error', {message: error.message});

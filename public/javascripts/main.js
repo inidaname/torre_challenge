@@ -21,11 +21,29 @@ function setSearch(){
             let people = JSON.parse(data);
             result.innerHTML = null;
 
-            people.forEach(person => {
-                let div = document.createElement('div');
-                div.innerText = person.name;
-                result.appendChild(div)
-            })
+            people.map((v,i) => {
+                console.log(v)
+                let imgSrc = (v.picture !== undefined) ? v.picture : '/images/blank-profile-picture.png';
+                let userProfile = `
+                    <div class="profile-card">
+                    <a href="/${v.publicId}">
+                    <h2>${v.name}</h2>
+                    <img src="${imgSrc}" alt="${v.name}'s Picture" width="123">
+                    <p>${v.professionalHeadline}</p>
+                    </a>
+                    </div>
+                `;
+
+                return result.append(document.createRange().createContextualFragment(userProfile));
+            }).join(' ');
+
+            // people.forEach(person => {
+            //     let div = document.createElement('div');
+            //     div.insertAdjacentHTML('afterbegin', );
+            //     div.classList.add('profile-card');
+            //     div.innerText = person.name;
+            //     result.appendChild(div)
+            // })
         });
     }
 }
@@ -48,3 +66,4 @@ function searchConnection() {
         });
     }
 }
+
