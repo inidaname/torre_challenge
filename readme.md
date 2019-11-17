@@ -20,7 +20,7 @@ A search application using [torre's](https://torre.bio) data to fetch list of us
 ## How to use the application
 * Navigate to the home page
 * On the search bar type in a registered user's name
-* This will load result of user.
+* This will load result of users matching your search query.
 * Click to navigate to the profile of the user.
 * On User's profile click the connection button
 * This will load a modal to search for connections
