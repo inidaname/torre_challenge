@@ -25,3 +25,5 @@ A search application using [torre's](https://torre.bio) data to fetch list of us
 * On User's profile click the connection button
 * This will load a modal to search for connections
 * Result can be sorted by name or weight.
+
+A progress log for this project can be found [here](./progresslog.md)
