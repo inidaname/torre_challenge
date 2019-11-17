@@ -1,91 +1,104 @@
 
-function getAjax(url, success) {
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) success(xhr.response);
-    };
-    xhr.setRequestHeader('check', 'true');
-    xhr.send();
-    return xhr;
-}
+(function () {
+    const search = document.querySelector('#user');
+    const searchCon = document.querySelector('#conn');
+    const searchBtn = document.querySelector('#searchBtn');
+    const connectionBtn = document.querySelector('#connectionBtn');
+    const sortList = document.querySelector('#sortList');
 
+    const modal = document.getElementById("myModal");
+    const btn = document.getElementById("myBtn");
+    const span = document.getElementsByClassName("close")[0];
+    
+    let listResult;
+    let order;
 
-function setSearch(){
-    let search = document.querySelector('#user');
-    let result = document.querySelector('#result');
-
-    if (search.value.length >= 2) {
-        getAjax(`/search/${search.value}`, function(data) {
-            let people = JSON.parse(data);
-            result.innerHTML = null;
-
-            people.map((v,i) => {
-                console.log(v)
-                let imgSrc = (v.picture !== undefined) ? v.picture : '/images/blank-profile-picture.png';
-                let userProfile = `
-                    <div class="profile-card">
-                    <a href="/${v.publicId}">
-                    <h2>${v.name}</h2>
-                    <img src="${imgSrc}" alt="${v.name}'s Picture" width="123">
-                    <p>${v.professionalHeadline}</p>
-                    </a>
-                    </div>
-                `;
-
-                return result.append(document.createRange().createContextualFragment(userProfile));
-            }).join(' ');
-        });
+    function getAjax(url, success) {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        xhr.open('GET', url);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState > 3 && xhr.status == 200) success(xhr.response);
+        };
+        xhr.setRequestHeader('check', 'true');
+        xhr.send();
+        return xhr;
     }
-}
-
-function searchConnection(user) {
-    let searchCon = document.querySelector('#conn');
-    let result = document.querySelector('#connectionResult');
 
 
-    if (searchCon.value.length >= 2) {
-        getAjax(`/search/${user}/${searchCon.value}`, function(data) {
-            let people = JSON.parse(data);
-            result.innerHTML = null;
-            people.map((v,i) => {
-                
-                let imgSrc = (v.person.picture !== undefined) ? v.person.picture : '/images/blank-profile-picture.png';
-                let userProfile = `
-                    <div class="profile-card">
-                    <a href="/${v.person.publicId}">
-                    <h2>${v.person.name}</h2>
-                    <img src="${imgSrc}" alt="${v.person.name}'s Picture" width="123">
-                    <p>${v.person.professionalHeadline}</p>
-                    </a>
-                    </div>
-                `;
+    function sorting(arr = listResult, result = document.querySelector('#result')) {
+        order = !order;
+        result.innerHTML = null;
+        let sorted;
 
-                return result.append(document.createRange().createContextualFragment(userProfile));
-            }).join(' ');
+        if (arr.person) {
+            sorted = arr.sort((a, b) => {
+                return order ? (a.person.name.toLowerCase() > b.person.name.toLowerCase()) ? 1 : -1 : (a.person.name.toLowerCase() < b.person.name.toLowerCase()) ? 1 : -1;
+            });
+        } else {
+            sorted = arr.sort((a, b) => {
+                return order ? (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1;
+            });
+        }
 
-        });
+        return sorted.map((v, i) => {
+            let person = (v.person) ? v.person : v;
+            let imgSrc = (person.picture !== undefined) ? person.picture : '/images/blank-profile-picture.png';
+            let userProfile = `
+                <div class="profile-card">
+                <a href="/${person.publicId}">
+                <h2>${person.name} <small>${person.weight}</small></h2>
+                <img src="${imgSrc}" alt="${person.name}'s Picture" width="123">
+                <p>${person.professionalHeadline}</p>
+                </a>
+                </div>
+            `;
+
+            return result.append(document.createRange().createContextualFragment(userProfile));
+        }).join(' ');
     }
-}
 
-(function(){
-    var modal = document.getElementById("myModal");
-    
-    var btn = document.getElementById("myBtn");
-    
-    var span = document.getElementsByClassName("close")[0];
-    
-    btn.onclick = function() {
-      modal.style.display = "block";
+    sortList.addEventListener('change',(e)=> {
+            sorting()
+    })
+
+    function setSearch() {
+        if (search.value.length >= 2) {
+            getAjax(`/search/${search.value}`, function (data) {
+                let people = JSON.parse(data);
+                listResult = people;
+                sorting(people)
+            });
+        }
     }
-    
-    span.onclick = function() {
-      modal.style.display = "none";
+
+    function searchConnection(user) {
+        let result = document.querySelector('#connectionResult');
+
+        if (searchCon.value.length >= 2) {
+            getAjax(`/search/${user}/${searchCon.value}`, function (data) {
+                let people = JSON.parse(data);
+                sorting(people, result)
+            });
+        }
     }
-    
-    window.onclick = function(event) {
-      if (event.target == modal) {
+
+
+    search.addEventListener('input', (e) => setSearch());
+    searchBtn.addEventListener('click', (e) => setSearch());
+    searchCon.addEventListener('input', (e) => searchConnection(document.querySelector('#username').value));
+    connectionBtn.addEventListener('click', (e) => searchConnection(document.querySelector('#username').value));
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
         modal.style.display = "none";
-      }
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 })();

@@ -1,5 +1,11 @@
 <main>
   <article>
+    <div class="sorting">
+      <select name="sorting" id="sortList">
+        <option value="Name">Name</option>
+        <option value="weights">Weights</option>
+      </select>
+    </div>
     <section id="result" class="result">
       <p>Type and Search for a Torre User</p>
     </section>
@@ -16,8 +22,8 @@
     <div class="form-group">
       <label for="conn">Search Connection</label>
       <input type="search" name="connection" id="conn">
-
-      <button onclick="searchConnection('{{person.publicId}}')">Search</button>
+      <input type="hidden" id="username" value="{{person.publicId}}">
+      <button id="connectionBtn">Search</button>
     </div>
     <hr>
     <div id="connectionResult" class="result">
