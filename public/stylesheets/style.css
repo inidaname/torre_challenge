@@ -246,6 +246,22 @@ footer {
   margin-top: 12px;
 }
 
+.sorting {
+  margin-top: 21px;
+  margin-left: 21px;
+}
+
+.sorting select {
+  height: 35px;
+  width: 145px;
+  font-size: 16px;
+}
+
+.sorting label {
+  margin-right: 12px;
+  font-size: 16px;
+}
+
 @media only screen and (max-width: 600px) {
   header {
     min-height: 300px;

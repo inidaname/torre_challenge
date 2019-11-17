@@ -29,6 +29,10 @@
         result.innerHTML = null;
         let sorted;
 
+        if (!arr) {
+            return;
+        }
+
         if (sortReq === 'name') {
             if (arr.person) {
                 sorted = arr.sort((a, b) => (a.person.name.toLowerCase() > b.person.name.toLowerCase()) ? 1 : -1);
