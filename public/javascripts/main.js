@@ -11,7 +11,7 @@
     const span = document.getElementsByClassName("close")[0];
     
     let listResult;
-    let order;
+    let sortReq;
 
     function getAjax(url, success) {
         var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
@@ -26,18 +26,21 @@
 
 
     function sorting(arr = listResult, result = document.querySelector('#result')) {
-        order = !order;
         result.innerHTML = null;
         let sorted;
 
-        if (arr.person) {
-            sorted = arr.sort((a, b) => {
-                return order ? (a.person.name.toLowerCase() > b.person.name.toLowerCase()) ? 1 : -1 : (a.person.name.toLowerCase() < b.person.name.toLowerCase()) ? 1 : -1;
-            });
+        if (sortReq === 'name') {
+            if (arr.person) {
+                sorted = arr.sort((a, b) => (a.person.name.toLowerCase() > b.person.name.toLowerCase()) ? 1 : -1);
+            } else {
+                sorted = arr.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
+            }
         } else {
-            sorted = arr.sort((a, b) => {
-                return order ? (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? 1 : -1;
-            });
+            if (arr.person) {
+                sorted = arr.sort((a, b) =>  (a.person.weight > b.person.weight) ? 1 : -1);
+            } else {
+                sorted = arr.sort((a, b) => (a.weight > b.weight) ? 1 : -1);
+            }
         }
 
         return sorted.map((v, i) => {
@@ -57,8 +60,9 @@
         }).join(' ');
     }
 
-    sortList.addEventListener('change',(e)=> {
-            sorting()
+    sortList.addEventListener('input',(e)=> {
+            sortReq = e.target.value;
+            sorting();
     })
 
     function setSearch() {
