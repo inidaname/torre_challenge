@@ -16,6 +16,7 @@ A search application using [torre's](https://torre.bio) data to fetch list of us
  * Install dependencies run `$ npm install`
  * Run application `npm run start`
  * on the browser navigate [localhost:3000](http://localhost:3000)
+ * This application is also Deployed on heroku [https://torrechallenge.herokuapp.com/](https://torrechallenge.herokuapp.com/)
 
 ## How to use the application
 * Navigate to the home page
